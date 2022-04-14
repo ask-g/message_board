@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import models.Message;
+import utils.DBUtil;
 
 @WebServlet("/create")
 public class CreateServlet extends HttpServlet {
@@ -29,16 +33,16 @@ public class CreateServlet extends HttpServlet {
             String title=request.getParameter("title");
             m.setTitle(title);
             String content=request.getParameter("content");
-            m.setContent(content)
+            m.setContent(content);
 
             Timestamp currentTime=new Timestamp(System.currentTimeMillis());
-            m.setCreater_at(currentTime);
-            m.setUPdated_at(currentTime);
+            m.setCreated_at(currentTime);
+            m.setUpdated_at(currentTime);
 
             em.persist(m);
             em.getTransaction().commit();
             em.close();
-            response.sendRedirect(request.getContextPath()+"/inex");
+            response.sendRedirect(request.getContextPath()+"/index");
 
         }
     }
