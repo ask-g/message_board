@@ -3,31 +3,33 @@ package controllers;
 import java.io.IOException;
 
 import javax.persistence.EntityManager;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.protobuf.Message;
+import models.Message;
+import utils.DBUtil;
 
 @WebServlet("/show")
-public class showServlet extends HttpServlet {
+public class ShowServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public showServlet() {
+    public ShowServlet() {
         super();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em =DBUtil.createEntityManager();
 
-        Message m =em.find(Message.class, Integer.paeseInt(request.getParameter("id")));
+        Message m =em.find(Message.class, Integer.parseInt(request.getParameter("id")));
 
         em.close();
 
         request.setAttribute("message", m);
-        RequestDisoatcher rd =request.getRewuestDispatcher("/WEB-INF/views/messages/show.jsp");
+        RequestDispatcher rd =request.getRequestDispatcher("/WEB-INF/views/messages/show.jsp");
         rd.forward(request,response);
 
 
