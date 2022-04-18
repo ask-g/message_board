@@ -5,7 +5,7 @@
 <c:import url="../layout/app.jsp">
     <c:param name="content">
         <c:choose>
-            <c:when test="${message != null}"> }
+            <c:when test="${message != null}">
 <h2>id:${message.id}のメッセージ詳細ページ</h2>
                 <table>
                     <tbody>
@@ -42,6 +42,5 @@
                 <h2>お探しのデータは見つかりませんでした</h2>
             </c:otherwise>
         </c:choose>
-
     </c:param>
 </c:import>
